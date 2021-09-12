@@ -1,0 +1,129 @@
+<div class="col-xs-12 col-sm-8 card-body mb-4">
+  <div class="title bg-card">
+    PRODUTOS
+  </div>
+
+  <form [formGroup]="formulario">
+    <div class="form-group row align-content justify-content-center bg-card py-4">
+      <div class="col-12 col-md-6 col-lg-3 bg-card mt-2">
+        <label class="bg-card mb-2" for="barcode">Código de Barras</label>
+        <input formControlName="barcode" type="text" class="form-control text-muted" id="barcode"
+          placeholder="Escreva o código de barras">
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 bg-card mt-2">
+        <label class="bg-card mb-2" for="nome">Nome</label>
+        <input formControlName="nome" type="text" class="form-control text-muted" id="nome"
+          placeholder="Escreva o nome do produto">
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3   bg-card mt-2">
+        <label class="bg-card mb-2" for="status">Status</label>
+        <select formControlName="status" class="form-control text-muted" id="status">
+          <option>Todos</option>
+          <option>Draft</option>
+          <option>Imported</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 bg-card mt-4 text-center">
+        <button
+          class="btn-purple w-100 d-flex justify-content-center mx-auto rounded-pill py-1 px-3 mt-3 icon-button-primary"
+          (click)="buscar()">
+          <i class="material-icons inline-icon icon-button-primary">search</i>
+          CONSULTAR
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="title bg-card mb-4"></div>
+
+  <ng-container *ngIf="listaSearch != null && listaSearch.length > 0 else listaVazia">
+    <div class="col-12 align-content flex-wrap justify-content-center flex-row mb-2">
+      <div class="col-12 col-md-4">
+        <button
+          class=" btn btn-purple d-flex justify-content-center text-center rounded-pill mx-auto icon-button-primary"
+          (click)="openModalNovoProduto()">
+          <i class="material-icons inline-icon icon-button-primary">add</i>
+          NOVO PRODUTO
+        </button>
+      </div>
+      <h6 class="col-12 col-md-6 text-muted text-center mt-1 bg-card">Foram encontrados
+        {{listaSearch.length}} produtos para a sua busca
+      </h6>
+    </div>
+    <div class="col-12 d-flex flex-wrap bg-card">
+      <div class="col-12 col-md-6 bg-card" *ngFor="let item of listaSearch;">
+        <div class="card-mini mx-4 my-4">
+          <a href="{{item.image_url}}" target="_blank">
+            <img src="{{item.image_url}}">
+          </a>
+          <div class="title my-2">
+            <a class="link-white" href="{{item.url}}" target="_blank">{{ item.product_name }}</a>
+          </div>
+          <h6 class="text-center mb-2">
+            <b>Código de Barras:</b> {{ item.barcode }}
+          </h6>
+          <h6 class="text-center mb-2">
+            <b>Marcas:</b> {{ item.brands }}
+          </h6>
+          <h6 class="text-center mb-2">
+            <b>Embalagem:</b> {{ item.packaging }}
+          </h6>
+          <h6 class="text-center mb-2">
+            <b>Quantidade:</b> {{ item.quantity }}
+          </h6>
+          <h6 class="text-center mb-2">
+            <b>Categorias:</b> {{ item.categories }}
+          </h6>
+          <div class="col-12 align-content flex-wrap justify-content-center mb-2">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-4 mx-2">
+              <button
+                class="btn btn-purple d-flex justify-content-center text-center rounded-pill mt-3 icon-button-primary w-100"
+                (click)="openModalEditar(item)">
+                <i class="material-icons inline-icon icon-button-primary">zoom_in</i>
+                EDITAR
+              </button>
+            </div>
+            <div class="col-12 col-md-8 col-lg-6 col-xl-4 mx-2">
+              <button class="btn btn-danger d-flex justify-content-center rounded-pill mt-3 bg-black w-100"
+                (click)="openModalExcluir(item)">
+                <i class="material-icons inline-icon">clear</i>
+                REMOVER
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #listaVazia>
+    <ng-container *ngIf="searching == false else loading">
+      <div class="bg-card py-4">
+        <i class="d-flex material-icons font-lg justify-content-center bg-card loading mb-4">find_in_page</i>
+
+        <h4 class="text-muted text-center bg-card mb-2">
+          Nenhum produto para ser exibido
+        </h4>
+
+        <button
+          class="btn btn-purple d-flex justify-content-center text-center rounded-pill mt-3 mx-auto icon-button-primary"
+          (click)="openModalNovoProduto()">
+          <i class="material-icons inline-icon icon-button-primary">add</i>
+          CADASTRAR NOVO PRODUTO
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-template #loading>
+      <div class="align-content justify-content-center flex-column bg-card py-4">
+        <img class="bg-card ml-2" src="../../../assets/img/loading.svg" style="width: 255px; height: 255px;">
+        <h4 class="text-muted text-center bg-card">
+          Buscando seus produtos...
+        </h4>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>

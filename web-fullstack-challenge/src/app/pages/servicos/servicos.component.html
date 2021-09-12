@@ -1,0 +1,80 @@
+<div class="col-xs-12 col-8 card-body">
+  <div class="title bg-card mb-4">
+    SERVIÇOS
+  </div>
+
+  <div class="col-12 d-flex flex-wrap bg-card mb-4">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4 card-mini mx-auto">
+      <div class="title mb-2">
+        OPEN FOOD FACTS
+      </div>
+      <h6 class="text-center mb-2">
+        Recupera os últimos 100 produtos do Open Food Facts*<br />
+        <small class="text-muted">*Caso o produto esteja incompleto, ele não será adicionado</small>
+      </h6>
+      <div class="align-content justify-content-center mb-2">
+        <button class="btn-purple align-self-center rounded-pill px-3" [disabled]="recuperarRunning"
+          (click)="recuperarProdutos()">
+          EXECUTAR
+        </button>
+        <img class="loading ml-2" src="../../../assets/img/loading.svg" style="width: 35px; height: 35px;"
+          *ngIf="recuperarRunning">
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mx-auto d-flex flex-wrap text-center bg-card">
+      <h6 class="text-muted bg-card mt-2">
+        * O serviço OPEN FOOD FACTS roda todos os dias às 14h.
+      </h6>
+      <h6 class="text-muted bg-card mt-2">
+        * Sempre que ele roda, ele consegue capturar ATÉ 100 produtos.
+      </h6>
+      <h6 class="text-muted bg-card mt-2">
+        * Esse número pode variar caso os produtos capturados estejam incompletos.
+      </h6>
+      <h6 class="text-muted bg-card mt-2">
+        * Caso o produto capturado já exista no nosso banco, ele será ignorado.
+      </h6>
+    </div>
+  </div>
+
+  <h6 class="text-success text-center bg-card mb-4" style="font-weight: bold;" *ngIf="recuperarSuccess">
+    Produtos recuperados com sucesso! {{ recuperarCount }} produtos recuperados.
+  </h6>
+
+  <div class="col-12 d-flex flex-wrap bg-card mb-4">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-xl-4 card-mini mx-auto">
+      <div class="title mb-2">
+        DELETE ALL PRODUCTS
+      </div>
+      <h6 class="text-center mb-2">
+        Deleta todos os produtos do nosso banco de dados*<br />
+        <small class="text-muted">*Atenção!! Esse serviço irá limpar todo o banco</small>
+      </h6>
+      <div class="align-content justify-content-center mb-2">
+        <button class="btn-purple align-self-center rounded-pill px-3" [disabled]="deleteRunning"
+          (click)="deletarProdutos()">
+          EXECUTAR
+        </button>
+        <img class="loading ml-2" src="../../../assets/img/loading.svg" style="width: 35px; height: 35px;"
+          *ngIf="deleteRunning">
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mx-auto d-flex flex-wrap text-center bg-card">
+      <h6 class="text-muted bg-card mt-2">
+        * O serviço DELETE ALL PRODUCTS roda apenas manualmente.
+      </h6>
+      <h6 class="text-muted bg-card mt-2">
+        * Quando executado, ele remove TODOS os produtos do nosso banco.
+      </h6>
+      <h6 class="text-muted bg-card mt-2">
+        * ATENÇÃO!! Após executado, TODOS os produtos serão perdidos.
+      </h6>
+    </div>
+  </div>
+
+  <h6 class="text-success text-center bg-card mb-4" style="font-weight: bold;" *ngIf="deleteSuccess">
+    Todos os produtos foram deletados do nosso banco.
+  </h6>
+</div>

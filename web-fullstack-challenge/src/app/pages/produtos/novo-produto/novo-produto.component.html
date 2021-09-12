@@ -1,0 +1,76 @@
+<div class="modal-body">
+  <div class="align-content justify-content-between flex-wrap bg-black mb-2">
+    <h5 class="bg-black text-muted text-truncate" style="margin-bottom: 0px !important; max-width: 90%;">
+      NOVO PRODUTO
+    </h5>
+    <i class="material-icons inline-icon pointer bg-black" (click)="bsModalRef.hide()">cancel</i>
+  </div>
+
+  <div class="title-line mb-4"></div>
+
+  <form class="bg-black mb-4" [formGroup]="formulario">
+    <div class="bg-black mb-3">
+      <label class="bg-black mb-2" for="code">Código de Barras</label>
+      <input class="bg-black" formControlName="code" type="number" class="form-control text-muted" id="code"
+        placeholder="Escreva o código de barras do produto" required>
+    </div>
+
+    <div class="bg-black mb-3">
+      <label class="bg-black mb-2" for="product_name">Nome do Produto</label>
+      <input class="bg-black" formControlName="product_name" type="text" class="form-control text-muted"
+        id="product_name" placeholder="Escreva o nome do produto" required>
+    </div>
+
+    <div class="bg-black mb-3">
+      <label class="bg-black mb-2" for="url">URL</label>
+      <input class="bg-black" formControlName="url" type="text" class="form-control text-muted" id="url"
+        placeholder="Escreva a URL do produto no Open Food Facts" required>
+    </div>
+
+    <div class="bg-black mb-3">
+      <label class="bg-black mb-2" for="image_url">URL da Imagem</label>
+      <input class="bg-black" formControlName="image_url" type="text" class="form-control text-muted" id="image_url"
+        placeholder="Escreva a URL da imagem do produto no Open Food Facts" required>
+    </div>
+
+    <div class="bg-black mb-3">
+      <label class="bg-black mb-2" for="brands">Marcas</label>
+      <input class="bg-black" formControlName="brands" type="text" class="form-control text-muted" id="brands"
+        placeholder="Escreva as marcas do produto" required>
+    </div>
+
+    <div class="bg-black mb-3">
+      <label class="bg-black mb-2" for="packaging">Embalagem</label>
+      <input class="bg-black" formControlName="packaging" type="text" class="form-control text-muted" id="packaging"
+        placeholder="Escreva a embalagem do produto" required>
+    </div>
+
+    <div class="bg-black mb-3">
+      <label class="bg-black mb-2" for="quantity">Quantidade</label>
+      <input class="bg-black" formControlName="quantity" type="text" class="form-control text-muted" id="quantity"
+        placeholder="Escreva a quantidade do produto" required>
+    </div>
+
+    <div class="bg-black mb-3">
+      <label class="bg-black mb-2" for="categories">Categorias</label>
+      <input class="bg-black" formControlName="categories" type="text" class="form-control text-muted" id="categories"
+        placeholder="Escreva as categorias do produto" required>
+    </div>
+  </form>
+
+  <div class="align-content justify-content-center text-center bg-black mb-2" *ngIf="msgErro == true">
+    <b class="text-danger bg-black">Você deve preencher todos os campos para cadastrar o produto</b>
+  </div>
+
+  <div class="align-content-between justify-content-center bg-black">
+    <button
+      class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5 btn-outline-purple bg-black rounded-pill py-1 px-3 mx-3 my-1"
+      (click)="bsModalRef.hide()">
+      FECHAR
+    </button>
+    <button type="submit" class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5 btn-purple rounded-pill py-1 px-3 mx-3 my-1"
+      [disabled]="!formulario.valid" (click)="cadastrar()">
+      CADASTRAR
+    </button>
+  </div>
+</div>
