@@ -356,3 +356,7 @@ modal-container {
 .loading {
   border: none !important;
 }
+
+.text-white {
+  color: var(--white);
+}

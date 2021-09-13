@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +32,8 @@ import { ServicosComponent } from './pages/servicos/servicos.component';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    ModalModule
+    ModalModule,
+    NgbModule
   ],
   providers: [BsModalService],
   bootstrap: [AppComponent]
