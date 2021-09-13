@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -33,7 +34,8 @@ import { ServicosComponent } from './pages/servicos/servicos.component';
     FormsModule,
     BrowserAnimationsModule,
     ModalModule,
-    NgbModule
+    NgbModule,
+    NgxPaginationModule
   ],
   providers: [BsModalService],
   bootstrap: [AppComponent]

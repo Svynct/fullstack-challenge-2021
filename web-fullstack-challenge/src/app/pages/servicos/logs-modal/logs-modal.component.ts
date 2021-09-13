@@ -11,6 +11,7 @@ export class LogsModalComponent implements OnInit {
 
   logType: number;
   logs: any[];
+  page: number = 1;
 
   constructor(private service: LogService, public bsModalRef: BsModalRef) { }
 

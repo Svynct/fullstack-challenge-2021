@@ -10,7 +10,10 @@
 
   <ng-container *ngIf="logs != null && logs.length > 0 else noLogs">
     <div class="col-12 d-flex justify-content-center flex-wrap flex-row">
-      <div *ngFor="let log of logs">
+      <div *ngFor="let log of logs | paginate: { id: 'logPagination',
+      itemsPerPage: 5,
+      currentPage: page,
+      totalItems: logs.length}">
         <div class="card-mini mb-4">
           <h5 class="mb-2">
             {{ log.data }}
@@ -21,6 +24,8 @@
           </div>
         </div>
       </div>
+      <pagination-controls (pageChange)="page = $event" id="logPagination" style="margin-right: 2rem;">
+      </pagination-controls>
     </div>
   </ng-container>
 </div>
