@@ -1,9 +1,8 @@
 ﻿using api_fullstack_challenge.Models.Models;
 using api_fullstack_challenge.Repository.Repository.Interface;
-using Microsoft.Extensions.Configuration;
+using api_fullstack_challenge.Util;
 using MongoDB.Driver;
 using System;
-using System.Threading.Tasks;
 
 namespace api_fullstack_challenge.Repository.Repository.Implementation
 {
@@ -15,21 +14,10 @@ namespace api_fullstack_challenge.Repository.Repository.Implementation
             var log = new Log
             {
                 Message = message,
-                Data = DateTime.Now.ToLocalTime()
+                Data = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
             };
 
             Collection.InsertOne(log);
-        }
-
-        public async Task CreateLogAsync(string message)
-        {
-            var log = new Log
-            {
-                Message = message,
-                Data = DateTime.Now.ToLocalTime()
-            };
-
-            await Collection.InsertOneAsync(log);
         }
     }
 }

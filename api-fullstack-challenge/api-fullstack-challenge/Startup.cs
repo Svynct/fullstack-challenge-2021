@@ -1,4 +1,3 @@
-using api_fullstack_challenge.Controllers;
 using api_fullstack_challenge.Repository;
 using api_fullstack_challenge.Repository.Interface;
 using api_fullstack_challenge.Repository.Repository.Implementation;
@@ -13,10 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
-using Quartz;
-using Quartz.Impl;
-using System.Collections.Specialized;
-using System.Threading.Tasks;
 
 namespace api_fullstack_challenge
 {
