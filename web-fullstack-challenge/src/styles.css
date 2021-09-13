@@ -365,3 +365,7 @@ modal-container {
   text-align: center !important;
   margin-right: 2rem !important;
 }
+
+.ngx-pagination .current {
+  background: var(--indigo) !important;
+}
