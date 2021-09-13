@@ -54,7 +54,11 @@
       </h6>
     </div>
     <div class="col-12 d-flex flex-wrap bg-card">
-      <div class="col-12 col-md-6 bg-card" *ngFor="let item of listaSearch;">
+      <div class="col-12 col-md-6 bg-card" *ngFor="let item of listaSearch | paginate:
+      { id: 'listaPagination',
+        itemsPerPage: 6,
+        currentPage: page,
+        totalItems: listaSearch.length}">
         <div class="card-mini mx-4 my-4">
           <a href="{{item.image_url}}" target="_blank">
             <img src="{{item.image_url}}">
@@ -97,6 +101,8 @@
         </div>
       </div>
     </div>
+    <pagination-controls (pageChange)="page = $event" id="listaPagination">
+    </pagination-controls>
   </ng-container>
 
   <ng-template #listaVazia>

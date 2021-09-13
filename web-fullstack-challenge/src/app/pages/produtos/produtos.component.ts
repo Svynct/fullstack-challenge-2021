@@ -21,6 +21,7 @@ export class ProdutosComponent implements OnInit {
   formulario: FormGroup;
   listaSearch: any[];
   searching: boolean = false;
+  page: number = 1;
 
   constructor(
     private fb: FormBuilder,
