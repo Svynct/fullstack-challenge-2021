@@ -1,5 +1,6 @@
 ﻿using api_fullstack_challenge.Models;
 using api_fullstack_challenge.Models.Enum;
+using api_fullstack_challenge.Models.Models.Enum;
 using api_fullstack_challenge.Repository;
 using api_fullstack_challenge.Repository.Repository.Implementation;
 using api_fullstack_challenge.Repository.Repository.Interface;
@@ -48,7 +49,7 @@ namespace api_fullstack_challenge.Services.Services.Scheduler
 
             var count = productService.CreateManyProductsWithCount(returnList);
 
-            logRepository.CreateLog($"SERVIÇO OPEN FOOD FACTS RODADO AUTOMATICAMENTE: {count} PRODUTOS ADICIONADOS");
+            logRepository.CreateLog($"SERVIÇO OPEN FOOD FACTS RODADO AUTOMATICAMENTE: {count} PRODUTOS ADICIONADOS", ELogType.Sync);
             
             return Task.FromResult(0);
         }

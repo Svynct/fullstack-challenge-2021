@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { take } from 'rxjs/operators';
 import { EditarProdutoComponent } from '../pages/produtos/editar-produto/editar-produto.component';
 import { NovoProdutoComponent } from '../pages/produtos/novo-produto/novo-produto.component';
+import { LogsModalComponent } from '../pages/servicos/logs-modal/logs-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +54,34 @@ export class ModalProvider {
         class: "modal-md"
       });
     });
+  }
+
+  openModalLogs(log: number) {
+    switch (log) {
+      case 1:
+        this.modalRef = this.modalService.show(LogsModalComponent, {
+          animated: true,
+          backdrop: true,
+          ignoreBackdropClick: true,
+          keyboard: true,
+          class: "modal-md",
+          initialState: {
+            logType: 1
+          }
+        });
+        break;
+      case 2:
+        this.modalRef = this.modalService.show(LogsModalComponent, {
+          animated: true,
+          backdrop: true,
+          ignoreBackdropClick: true,
+          keyboard: true,
+          class: "modal-md",
+          initialState: {
+            logType: 2
+          }
+        });
+        break;
+    }
   }
 }

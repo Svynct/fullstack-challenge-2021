@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalProvider } from 'src/app/providers/modal.provider';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class ServicosComponent implements OnInit {
   deleteRunning: boolean = false;
   deleteSuccess: boolean = false;
 
-  constructor(private service: ProductService) { }
+  constructor(private service: ProductService, private modalProvider: ModalProvider) { }
 
   ngOnInit() {
   }
@@ -46,5 +47,16 @@ export class ServicosComponent implements OnInit {
         this.deleteRunning = false;
       }
     })
+  }
+
+  openModalLogs(log: number) {
+    switch (log) {
+      case 1:
+        this.modalProvider.openModalLogs(1);
+        break;
+      case 2:
+        this.modalProvider.openModalLogs(2);
+        break;
+    }
   }
 }

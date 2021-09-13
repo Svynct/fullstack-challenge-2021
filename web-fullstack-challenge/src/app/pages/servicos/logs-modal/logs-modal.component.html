@@ -1,0 +1,36 @@
+<div class="modal-body">
+  <div class="align-content justify-content-between flex-wrap bg-black mb-2">
+    <h5 class="bg-black text-muted text-truncate" style="margin-bottom: 0px !important; max-width: 90%;">
+      LOGS DE {{ logType == 1 ? 'SINCRONIZAÇÃO' : 'REMOÇÃO' }}
+    </h5>
+    <i class="material-icons inline-icon pointer bg-black" (click)="bsModalRef.hide()">cancel</i>
+  </div>
+
+  <div class="title-line mb-4"></div>
+
+  <ng-container *ngIf="logs != null && logs.length > 0 else noLogs">
+    <div class="col-12 d-flex justify-content-center flex-wrap flex-row">
+      <div *ngFor="let log of logs">
+        <div class="card-mini mb-4">
+          <h5 class="mb-2">
+            {{ log.data }}
+          </h5>
+          <div class="title-line mb-2"></div>
+          <div class="mb-2">
+            {{ log.message }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #noLogs>
+  <div class="py-4">
+    <i class="d-flex material-icons font-lg justify-content-center loading mb-4">find_in_page</i>
+
+    <h4 class="text-muted text-center mb-2">
+      Nenhum log para ser exibido
+    </h4>
+  </div>
+</ng-template>

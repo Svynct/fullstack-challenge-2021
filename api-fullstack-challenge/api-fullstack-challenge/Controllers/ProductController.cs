@@ -1,6 +1,7 @@
 ﻿using api_fullstack_challenge.Models;
 using api_fullstack_challenge.Models.Enum;
 using api_fullstack_challenge.Models.Models;
+using api_fullstack_challenge.Models.Models.Enum;
 using api_fullstack_challenge.Repository.Repository.Interface;
 using api_fullstack_challenge.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -117,7 +118,7 @@ namespace api_fullstack_challenge.Controllers
                 if (returnList.Count > 0)
                     service.CreateManyProducts(returnList);
 
-                logRepository.CreateLog($"SERVIÇO OPEN FOOD FACTS RODADO MANUALMENTE: {returnList.Count} PRODUTOS ADICIONADOS");
+                logRepository.CreateLog($"SERVIÇO OPEN FOOD FACTS RODADO MANUALMENTE: {returnList.Count} PRODUTOS ADICIONADOS", ELogType.Sync);
 
                 return Ok(returnList);
             }
@@ -171,6 +172,8 @@ namespace api_fullstack_challenge.Controllers
             try
             {
                 var result = service.DeleteAll();
+
+                logRepository.CreateLog("EXCLUINDO TODOS OS PRODUTOS DO BANCO", ELogType.Delete);
 
                 return Ok(result);
             }
