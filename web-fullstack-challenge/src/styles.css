@@ -360,3 +360,8 @@ modal-container {
 .text-white {
   color: var(--white);
 }
+
+.ngx-pagination {
+  text-align: center !important;
+  margin-right: 2rem !important;
+}
