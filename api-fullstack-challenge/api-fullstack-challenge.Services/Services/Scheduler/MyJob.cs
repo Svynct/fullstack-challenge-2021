@@ -21,7 +21,7 @@ namespace api_fullstack_challenge.Services.Services.Scheduler
             IProductService productService = new ProductService(new ProductRepository());
             ILogRepository logRepository = new LogRepository();
 
-            var list = webScrapingService.GetProductsInfoScheduled();
+            var list = webScrapingService.GetProductsInfo();
 
             var returnList = new List<Product>();
 
