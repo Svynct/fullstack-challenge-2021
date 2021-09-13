@@ -1,3 +1,4 @@
+using api_fullstack_challenge.Controllers;
 using api_fullstack_challenge.Repository;
 using api_fullstack_challenge.Repository.Interface;
 using api_fullstack_challenge.Repository.Repository.Implementation;
@@ -13,6 +14,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using Quartz;
+using Quartz.Impl;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
 
 namespace api_fullstack_challenge
 {
@@ -33,14 +37,13 @@ namespace api_fullstack_challenge
             services.AddScoped<ILogRepository, LogRepository>();
             services.AddScoped<IWebScrapingService, WebScrapingService>();
 
-            services.AddScoped<IJob, MyJob>();
-            services.AddHostedService<JobScheduler>();
-
             var ConnectionString = Configuration.GetConnectionString("Database");
             var Connection = new MongoClient(ConnectionString);
             var DatabaseName = Configuration.GetConnectionString("DatabaseName");
 
             ContextMongo.Database = Connection.GetDatabase(DatabaseName);
+
+            Scheduler.Schedule();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
