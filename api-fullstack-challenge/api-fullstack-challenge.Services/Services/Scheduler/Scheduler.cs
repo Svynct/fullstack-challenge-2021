@@ -17,7 +17,7 @@ namespace api_fullstack_challenge.Services.Services.Scheduler
                 .WithIdentity("myTrigger")
                 .StartNow()
                 .WithPriority(1)
-                .WithCronSchedule("0 00 14 * * ?", x => x.InTimeZone(TimeZoneInfo.FindSystemTimeZoneById("Central Brazilian Standard Time")))
+                .WithCronSchedule("0 00 14 * * ?")
                 .Build();
 
             IJobDetail job = JobBuilder.Create<MyJob>()
