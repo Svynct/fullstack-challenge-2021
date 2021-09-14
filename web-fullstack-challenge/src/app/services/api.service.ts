@@ -4,7 +4,11 @@ import { Injectable } from "@angular/core";
   providedIn: "root"
 })
 export class ApiService {
-  baseUrl: string = 'https://localhost:44373';
+
+  baseUrl: string = 'https://api-fullstack-challenge-2021.herokuapp.com';
+
+  // URL DEV
+  // baseUrl: string = 'https://localhost:44373';
 
   constructor() { }
 
