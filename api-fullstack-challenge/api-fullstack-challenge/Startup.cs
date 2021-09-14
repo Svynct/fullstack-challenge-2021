@@ -7,6 +7,7 @@ using api_fullstack_challenge.Services.Interface;
 using api_fullstack_challenge.Services.Services.Scheduler;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -40,6 +41,15 @@ namespace api_fullstack_challenge
 
             Scheduler.Schedule();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                                builder => builder
+                                .AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader());
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -56,6 +66,12 @@ namespace api_fullstack_challenge
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "api_fullstack_challenge v1"));
             }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+                ForwardedHeaders.XForwardedProto
+            });
 
             app.UseCors(x => x
                 .AllowAnyOrigin()

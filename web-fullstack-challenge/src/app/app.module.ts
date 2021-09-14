@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,6 +8,7 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppInterceptor } from './app.interceptor.service';
 import { HomeComponent } from './pages/home/home.component';
 import { EditarProdutoComponent } from './pages/produtos/editar-produto/editar-produto.component';
 import { NovoProdutoComponent } from './pages/produtos/novo-produto/novo-produto.component';
@@ -37,7 +38,12 @@ import { ServicosComponent } from './pages/servicos/servicos.component';
     NgbModule,
     NgxPaginationModule
   ],
-  providers: [BsModalService],
+  providers: [BsModalService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
