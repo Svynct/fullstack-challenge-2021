@@ -129,8 +129,8 @@ namespace api_fullstack_challenge.Controllers
         }
         #endregion
 
-        #region PUT
-        [HttpPut, Route("Product")]
+        #region POST
+        [HttpPost, Route("Product")]
         public ActionResult CreateProduct([FromBody] Product product)
         {
             try
@@ -147,8 +147,8 @@ namespace api_fullstack_challenge.Controllers
 
         #endregion
 
-        #region POST
-        [HttpPost, Route("Product/Update/{code}")]
+        #region PUT
+        [HttpPut, Route("Product/Update/{code}")]
         public ActionResult UpdateProduct(long code, [FromBody] ProductViewModel view)
         {
             try

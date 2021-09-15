@@ -7,6 +7,8 @@ namespace api_fullstack_challenge.Models.Models.Enum
         [Description("Sync")]
         Sync = 0,
         [Description("Delete")]
-        Delete = 1
+        Delete = 1,
+        [Description("Error")]
+        Error = 2
     }
 }

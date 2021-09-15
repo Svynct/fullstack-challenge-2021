@@ -31,6 +31,7 @@ namespace api_fullstack_challenge
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ILogRepository, LogRepository>();
+            services.AddScoped<ILogsErrorRepository, LogErrorRepository>();
             services.AddScoped<IWebScrapingService, WebScrapingService>();
 
             var ConnectionString = Configuration.GetConnectionString("Database");

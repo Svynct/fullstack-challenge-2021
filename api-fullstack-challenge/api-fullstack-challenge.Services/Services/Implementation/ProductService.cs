@@ -74,7 +74,10 @@ namespace api_fullstack_challenge.Services.Implementation
 
             products.ForEach(p => codes.Add(p.code));
 
-            var existingProducts = productRepository.GetManyProductsByCode(codes);
+            List<Product> existingProducts = new List<Product>();
+
+            if (codes.Count > 0)
+                existingProducts = productRepository.GetManyProductsByCode(codes);
 
             codes.Clear();
 
@@ -82,7 +85,8 @@ namespace api_fullstack_challenge.Services.Implementation
 
             products.RemoveAll(p => codes.Contains(p.code));
 
-            productRepository.CreateManyProducts(products);
+            if (products.Count > 0)
+                productRepository.CreateManyProducts(products);
 
             return products.Count;
         }

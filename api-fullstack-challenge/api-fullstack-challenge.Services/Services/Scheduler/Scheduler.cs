@@ -1,4 +1,6 @@
-﻿using Quartz;
+﻿using api_fullstack_challenge.Repository.Repository.Implementation;
+using api_fullstack_challenge.Repository.Repository.Interface;
+using Quartz;
 using Quartz.Impl;
 using System;
 using System.Collections.Specialized;
@@ -10,21 +12,34 @@ namespace api_fullstack_challenge.Services.Services.Scheduler
     {
         public static Task Schedule()
         {
-            IScheduler scheduler = GetScheduler();
-            scheduler.Start();
+            ILogsErrorRepository logsErrorRepository = new LogErrorRepository();
 
-            ITrigger trigger = TriggerBuilder.Create()
-                .WithIdentity("myTrigger")
-                .StartNow()
-                .WithPriority(1)
-                .WithCronSchedule("0 00 14 * * ?")
-                .Build();
+            try
+            {
+                IScheduler scheduler = GetScheduler();
+                scheduler.Start();
 
-            IJobDetail job = JobBuilder.Create<MyJob>()
-                .WithIdentity("myJob")
-                .Build();
+                ITrigger trigger = TriggerBuilder.Create()
+                    .WithIdentity("myTrigger")
+                    .StartNow()
+                    .WithPriority(1)
+                    .WithCronSchedule("0 0 14 1/1 * ? *")
+                    .Build();
 
-            scheduler.ScheduleJob(job, trigger);
+                IJobDetail job = JobBuilder.Create<MyJob>()
+                    .WithIdentity("myJob")
+                    .Build();
+
+                scheduler.ScheduleJob(job, trigger);
+            }
+            catch (Exception ex)
+            {
+                logsErrorRepository.CreateLog(
+                    title: "AGENDANDO SERVIÇO AUTOMATICO",
+                    innerEx: ex.Message,
+                    message: "ERRO AO AGENDAR O SERVIÇO OPEN FOOD FACTS");
+            }
+            
 
             return Task.FromResult(0);
         }

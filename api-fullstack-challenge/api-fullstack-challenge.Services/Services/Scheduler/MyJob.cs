@@ -21,36 +21,48 @@ namespace api_fullstack_challenge.Services.Services.Scheduler
             IWebScrapingService webScrapingService = new WebScrapingService();
             IProductService productService = new ProductService(new ProductRepository());
             ILogRepository logRepository = new LogRepository();
+            ILogsErrorRepository logErrorRepository = new LogErrorRepository();
 
-            var list = webScrapingService.GetProductsInfo();
-
-            var returnList = new List<Product>();
-
-            list.ForEach(product =>
+            try
             {
-                var p = new Product
+                var list = webScrapingService.GetProductsInfo();
+
+                var returnList = new List<Product>();
+
+                list.ForEach(product =>
                 {
-                    Id = ObjectId.GenerateNewId().ToString(),
-                    code = product.code,
-                    barcode = product.barcode,
-                    brands = product.brands,
-                    categories = product.categories,
-                    image_url = product.image_url,
-                    status = EStatus.Imported,
-                    imported_t = DateTime.Now,
-                    packaging = product.packaging,
-                    product_name = product.product_name,
-                    quantity = product.quantity,
-                    url = product.url
-                };
+                    var p = new Product
+                    {
+                        Id = ObjectId.GenerateNewId().ToString(),
+                        code = product.code,
+                        barcode = product.barcode,
+                        brands = product.brands,
+                        categories = product.categories,
+                        image_url = product.image_url,
+                        status = EStatus.Imported,
+                        imported_t = DateTime.Now,
+                        packaging = product.packaging,
+                        product_name = product.product_name,
+                        quantity = product.quantity,
+                        url = product.url
+                    };
 
-                returnList.Add(p);
-            });
+                    returnList.Add(p);
+                });
 
-            var count = productService.CreateManyProductsWithCount(returnList);
+                if (returnList.Count > 0)
+                    productService.CreateManyProductsWithCount(returnList);
 
-            logRepository.CreateLog($"SERVIÇO OPEN FOOD FACTS RODADO AUTOMATICAMENTE: {count} PRODUTOS ADICIONADOS", ELogType.Sync);
-            
+                logRepository.CreateLog($"SERVIÇO OPEN FOOD FACTS RODADO AUTOMATICAMENTE: {returnList.Count} PRODUTOS ADICIONADOS", ELogType.Sync);
+            }
+            catch (Exception ex)
+            {
+                logErrorRepository.CreateLog(
+                    title: "SERVIÇO OPEN FOOD FACTS AGENDADO",
+                    innerEx: ex.Message,
+                    message: $"ERRO EXECUTANDO O SERVIÇO AGENDADO");
+            }
+
             return Task.FromResult(0);
         }
     }
