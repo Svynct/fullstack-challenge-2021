@@ -33,7 +33,7 @@ export class ProductService {
   }
 
   createProduct(obj: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/product`, obj)
+    return this.http.post(`${this.baseUrl}/product`, obj)
       .pipe(
         take(1),
         map(result => result)
@@ -41,7 +41,7 @@ export class ProductService {
   }
 
   updateOneProduct(obj: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/product/update/${obj.code}`, obj)
+    return this.http.put(`${this.baseUrl}/product/update/${obj.code}`, obj)
       .pipe(
         take(1),
         map(result => result)
