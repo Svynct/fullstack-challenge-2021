@@ -5,6 +5,9 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+ENV TZ=America/Sao_Paulo 
+RUN ln -snf /usr/shaire/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["api-fullstack-challenge/api-fullstack-challenge.csproj", "api-fullstack-challenge/"]
