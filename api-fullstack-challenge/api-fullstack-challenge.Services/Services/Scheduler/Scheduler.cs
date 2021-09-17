@@ -23,7 +23,7 @@ namespace api_fullstack_challenge.Services.Services.Scheduler
                     .WithIdentity("myTrigger")
                     .StartNow()
                     .WithPriority(1)
-                    .WithCronSchedule("0 0 14 1/1 * ? *")
+                    .WithCronSchedule("0 0 12 * * ?")
                     .Build();
 
                 IJobDetail job = JobBuilder.Create<MyJob>()

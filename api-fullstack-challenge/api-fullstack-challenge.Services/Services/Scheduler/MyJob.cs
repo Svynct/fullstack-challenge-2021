@@ -50,10 +50,10 @@ namespace api_fullstack_challenge.Services.Services.Scheduler
                     returnList.Add(p);
                 });
 
-                if (returnList.Count > 0)
+                if (returnList?.Count > 0)
                     productService.CreateManyProductsWithCount(returnList);
 
-                logRepository.CreateLog($"SERVIÇO OPEN FOOD FACTS RODADO AUTOMATICAMENTE: {returnList.Count} PRODUTOS ADICIONADOS", ELogType.Sync);
+                logRepository.CreateLog($"SERVIÇO OPEN FOOD FACTS RODADO AUTOMATICAMENTE: {returnList?.Count} PRODUTOS ADICIONADOS", ELogType.Sync);
             }
             catch (Exception ex)
             {

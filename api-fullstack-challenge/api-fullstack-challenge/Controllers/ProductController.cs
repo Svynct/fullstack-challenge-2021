@@ -115,10 +115,10 @@ namespace api_fullstack_challenge.Controllers
                     returnList.Add(p);
                 });
 
-                if (returnList.Count > 0)
+                if (returnList?.Count > 0)
                     service.CreateManyProducts(returnList);
 
-                logRepository.CreateLog($"SERVIÇO OPEN FOOD FACTS RODADO MANUALMENTE: {returnList.Count} PRODUTOS ADICIONADOS", ELogType.Sync);
+                logRepository.CreateLog($"SERVIÇO OPEN FOOD FACTS RODADO MANUALMENTE: {returnList?.Count} PRODUTOS ADICIONADOS", ELogType.Sync);
 
                 return Ok(returnList);
             }
